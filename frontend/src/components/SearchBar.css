@@ -1,0 +1,37 @@
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 10px 15px;
+    width: 300px;
+    border-radius: 20px;
+    border: none;
+    background-color: #333;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.search-input:focus {
+    background-color: #444;
+}
+
+.search-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #e50914; /* Netflix Red */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.search-button:hover {
+    transform: scale(1.05);
+}

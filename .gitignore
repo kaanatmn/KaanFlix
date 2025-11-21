@@ -1,25 +1,29 @@
-﻿# --- General ---
+﻿# --- IDE & OS (Messy files) ---
 .DS_Store
-*.log
+Thumbs.db
 .vscode/
+.idea/
+*.log
 
-# --- Java / Spring Boot (backend) ---
-.gradle/
-build/
+# --- Backend (Java & Spring Boot) ---
 target/
-*.jar
 *.class
-.project
 .settings/
+.classpath
+.project
+# Ignore VS Code Java extension logs
+.github/
+# Ignore generic help file
+HELP.md
 
-# --- Node / React (frontend) ---
+# --- Frontend (Node & React) ---
 node_modules/
 dist/
 build/
 .npm/
+*.local
 
-# --- Environment Files (CRITICAL) ---
+# --- Secrets (SECURITY CRITICAL) ---
 .env
-*.env
 application.properties
 application.yml
