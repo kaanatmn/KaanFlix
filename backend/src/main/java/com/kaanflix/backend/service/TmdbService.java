@@ -20,18 +20,20 @@ public class TmdbService {
         return restTemplate.getForObject(url, String.class);
     }
 
-    /**
-     * Searches for movies matching the user's query.
-     * @param query The movie title to search for (e.g., "Batman")
-     * @return JSON response from TMDB
-     */
     public String searchMovies(String query) {
-        // API requires spaces to be encoded (e.g., "Batman%20Begins")
         String encodedQuery = query.replace(" ", "%20");
         String url = baseUrl + "search/movie?api_key=" + apiKey + "&query=" + encodedQuery;
         return restTemplate.getForObject(url, String.class);
     }
+
+    public String getMovieDetails(Long movieId) {
+        String url = baseUrl + "movie/" + movieId + "?api_key=" + apiKey + "&append_to_response=credits,videos";
+        return restTemplate.getForObject(url, String.class);
+    }
 }
+
+    
+
 
 
 

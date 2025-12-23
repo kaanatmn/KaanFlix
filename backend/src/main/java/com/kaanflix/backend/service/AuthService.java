@@ -38,7 +38,7 @@ public class AuthService {
         // 1. Find user in DB
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found!"));
 
-        // 2. Compare the raw password with the encrypted one in DB
+        // 2. Compare the raw password with the encrypted password stored in DB
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new RuntimeException("Invalid password!");
         }

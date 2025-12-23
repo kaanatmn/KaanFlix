@@ -1,0 +1,339 @@
+.movie-detail {
+    position: relative;
+    min-height: 100vh;
+    color: white;
+}
+
+/* Background Backdrop with Overlay */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.backdrop::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(20, 20, 20, 0.95) 0%,
+        rgba(20, 20, 20, 0.9) 50%,
+        rgba(20, 20, 20, 0.95) 100%
+    );
+}
+
+/* Content */
+.detail-content {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.back-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 1px solid #e50914;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    transition: all 0.3s;
+}
+
+.back-button:hover {
+    background-color: #e50914;
+    transform: translateX(-5px);
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    font-size: 2rem;
+}
+
+/* Grid Layout */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+}
+
+@media (max-width: 768px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Poster */
+.poster-section {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.detail-poster {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.add-to-list-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-to-list-btn:hover {
+    background-color: #f40612;
+    transform: scale(1.02);
+}
+
+/* Info Section */
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.movie-title {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.movie-meta-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.rating {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.divider {
+    color: #555;
+}
+
+/* Genres */
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.genre-tag {
+    background-color: rgba(229, 9, 20, 0.2);
+    border: 1px solid #e50914;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* Tagline */
+.tagline {
+    font-style: italic;
+    color: #aaa;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+/* Sections */
+.section {
+    margin-top: 20px;
+}
+
+.section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #e50914;
+}
+
+.overview {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #ddd;
+}
+
+/* Cast Grid */
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.cast-member {
+    text-align: center;
+}
+
+.cast-photo {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cast-photo-placeholder {
+    width: 100%;
+    height: 150px;
+    background-color: #333;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.cast-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.cast-character {
+    font-size: 0.8rem;
+    color: #999;
+    margin: 0;
+}
+
+/* Trailer */
+.trailer-container {
+    margin-top: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.trailer-container iframe {
+    display: block;
+}
+
+/* Lists Selection Modal */
+.lists-selection {
+    max-height: 400px;
+    overflow-y: auto;
+    margin: 15px 0;
+}
+
+.list-option {
+    background-color: #2a2a2a;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.list-option:hover {
+    background-color: #333;
+    transform: translateX(5px);
+}
+
+.list-option h4 {
+    color: white;
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+}
+
+.list-option p {
+    color: #aaa;
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+.list-option span {
+    color: #e50914;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    color: white;
+    margin-top: 0;
+}
+
+.modal-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-btn.create {
+    background-color: #e50914;
+    color: white;
+    width: 100%;
+}
+
+.modal-btn.create:hover {
+    background-color: #f40612;
+}
+
+.modal-btn.cancel {
+    background-color: #333;
+    color: white;
+}
+
+.modal-btn.cancel:hover {
+    background-color: #444;
+}

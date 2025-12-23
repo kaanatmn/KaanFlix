@@ -9,12 +9,21 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        if (formData.password.length < 6) {
+            alert("Password must be at least 6 characters!");
+            return;
+        }
+        
         try {
             const response = await api.post('/api/auth/register', formData);
-            alert(response.data); // Show success message
-            navigate('/login'); // Redirect to Login
+            alert(response.data);
+            navigate('/login');
         } catch (err) {
-            alert("Registration Failed: " + (err.response?.data || "Unknown Error"));
+            const errorMsg = typeof err.response?.data === 'string' 
+                ? err.response.data 
+                : JSON.stringify(err.response?.data) || "Unknown Error";
+            alert("Registration Failed: " + errorMsg);
         }
     };
 
@@ -28,6 +37,7 @@ const Register = () => {
                     className="auth-input"
                     value={formData.username}
                     onChange={(e) => setFormData({...formData, username: e.target.value})}
+                    required
                 />
                 <input 
                     type="email" 
@@ -35,13 +45,15 @@ const Register = () => {
                     className="auth-input"
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    required
                 />
                 <input 
                     type="password" 
-                    placeholder="Password" 
+                    placeholder="Password (min 6 characters)" 
                     className="auth-input"
                     value={formData.password}
                     onChange={(e) => setFormData({...formData, password: e.target.value})}
+                    required
                 />
                 <button type="submit" className="auth-button">Sign Up</button>
                 <p className="auth-link">

@@ -5,16 +5,19 @@ import MovieCard from './components/MovieCard';
 import SearchBar from './components/SearchBar';
 import Login from './components/Login';
 import Register from './components/Register';
-import UserProfile from './components/UserProfile'; // Import new page
+import UserProfile from './components/UserProfile';
+import MovieDetail from './components/MovieDetail';
+import MyLists from './components/MyLists';
+import BrowseLists from './components/BrowseLists';
+import ListDetail from './components/ListDetail';
 import './App.css';
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [user, setUser] = useState(null); // Track logged in user
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  // 1. Check if user is logged in on startup
   useEffect(() => {
     const checkUser = () => {
       const loggedInUser = localStorage.getItem('user');
@@ -26,13 +29,10 @@ function App() {
     };
 
     checkUser();
-
-    // Listen for login/logout events to update header instantly
     window.addEventListener('storage', checkUser);
     return () => window.removeEventListener('storage', checkUser);
   }, []);
 
-  // 2. Fetch Movies
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -60,38 +60,59 @@ function App() {
         <h1 className="brand" onClick={() => {setSearchQuery(''); navigate('/');}}>KaanFlix</h1>
         <SearchBar onSearch={handleSearch} />
         
-        {/* LOGIC: If User -> Show Icon. If No User -> Show Sign In */}
-        {user ? (
-            <div 
-                onClick={() => navigate('/profile')}
-                style={{
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    gap: '10px', 
-                    cursor: 'pointer'
-                }}
+        <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
+          {user && (
+            <button 
+              className="my-lists-btn" 
+              onClick={() => navigate('/my-lists')}
+              style={{
+                backgroundColor: '#333',
+                color: 'white',
+                border: 'none',
+                padding: '10px 20px',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                transition: 'all 0.3s'
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#e50914'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#333'}
             >
-                <span style={{color: 'white', fontWeight: 'bold'}}>{user.username}</span>
-                {/* The Silhouette Icon */}
-                <div style={{
-                    width: '40px', 
-                    height: '40px', 
-                    backgroundColor: '#e50914', 
-                    borderRadius: '5px',
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    alignItems: 'center',
-                    color: 'white',
-                    fontWeight: 'bold'
-                }}>
-                    {user.username.charAt(0).toUpperCase()}
-                </div>
-            </div>
-        ) : (
-            <button className="auth-button" style={{width: 'auto', padding: '10px 20px'}} onClick={() => navigate('/login')}>
-                Sign In
+              My Lists
             </button>
-        )}
+          )}
+          
+          {user ? (
+              <div 
+                  onClick={() => navigate('/profile')}
+                  style={{
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      gap: '10px', 
+                      cursor: 'pointer'
+                  }}
+              >
+                  <span style={{color: 'white', fontWeight: 'bold'}}>{user.username}</span>
+                  <div style={{
+                      width: '40px', 
+                      height: '40px', 
+                      backgroundColor: '#e50914', 
+                      borderRadius: '5px',
+                      display: 'flex', 
+                      justifyContent: 'center', 
+                      alignItems: 'center',
+                      color: 'white',
+                      fontWeight: 'bold'
+                  }}>
+                      {user.username.charAt(0).toUpperCase()}
+                  </div>
+              </div>
+          ) : (
+              <button className="auth-button" style={{width: 'auto', padding: '10px 20px'}} onClick={() => navigate('/login')}>
+                  Sign In
+              </button>
+          )}
+        </div>
       </header>
       
       <Routes>
@@ -107,6 +128,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/my-lists" element={<MyLists />} />
+        <Route path="/browse-lists" element={<BrowseLists />} />
+        <Route path="/list/:id" element={<ListDetail />} />
       </Routes>
     </div>
   );

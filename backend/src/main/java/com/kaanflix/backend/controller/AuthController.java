@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kaanflix.backend.dto.UserDTO;
 import com.kaanflix.backend.entity.User;
 import com.kaanflix.backend.service.AuthService;
 
@@ -31,7 +32,6 @@ public class AuthController {
         String password = request.get("password");
 
         try {
-            // Call the service to register the user
             authService.registerUser(username, email, password);
             return ResponseEntity.ok("User registered successfully!");
         } catch (RuntimeException e) {
@@ -47,12 +47,11 @@ public class AuthController {
 
         try {
             User user = authService.loginUser(username, password);
-            // Return the full user object (JSON) on successful login
-            return ResponseEntity.ok(user); 
+            // Return UserDTO (without password)
+            return ResponseEntity.ok(UserDTO.fromUser(user)); 
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }
     }
-
 }
 
